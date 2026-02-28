@@ -60,3 +60,33 @@ This is the backend system for the House Price Estimation Platform. It is built 
 - `POST /predict` - Get home price prediction
 - `GET /predictions` - Retrieve prediction history
 - `POST /train` - Trigger ML model retraining
+
+## Frontend (Gradio)
+
+The project now includes a Gradio UI for interacting with the backend.
+
+### Running the Gradio UI
+1. Navigate to the `frontend` directory:
+   ```bash
+   cd frontend
+   ```
+2. Create and activate a virtual environment (if not already active):
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+3. Install frontend dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run the Gradio app:
+   ```bash
+   python app.py
+   ```
+
+The UI will be available at `http://127.0.0.1:7860`. It communicates with the FastAPI backend at `http://127.0.0.1:8000`.
+
+- `GET /health` - Check health status
+- `POST /predict` - Get home price prediction
+- `GET /predictions` - Retrieve prediction history
+- `POST /train` - Trigger ML model retraining

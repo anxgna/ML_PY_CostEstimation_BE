@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: housing_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: housing_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build: .
+    container_name: housing_backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    restart: always
+    environment:
+      - DATABASE_URL=mysql+pymysql://user:password@db:3306/housing_db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+      - ./housing.csv:/app/housing.csv
+    depends_on:
+      - db
+
+  frontend:
+    build: .
+    container_name: housing_frontend
+    command: python app.py
+    restart: always
+    environment:
+      - API_URL=http://backend:8000/predict
+    ports:
+      - "7860:7860"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

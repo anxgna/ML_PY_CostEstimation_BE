@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "mysql+pymysql://user:password@localhost:3306/housing_db")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+psycopg2://postgres.gsmczkwrhtlpquzyylcx:NewStrongPassword123%21@aws-1-ap-northeast-1.pooler.supabase.com:5432/postgres")
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
