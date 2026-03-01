@@ -117,6 +117,12 @@ The project now includes a Gradio UI for interacting with the backend.
    python app.py
    ```
 
+### Live Deployment
+
+- **Frontend UI:** [https://cost-estimation-ui.onrender.com](https://cost-estimation-ui.onrender.com)
+- **Backend API:** [https://cost-estimation-api-wjx7.onrender.com](https://cost-estimation-api-wjx7.onrender.com)
+
+### Local Deployment
 The UI will be available at `http://127.0.0.1:7860`. It communicates with the FastAPI backend at `http://127.0.0.1:8000`.
 
 - `GET /health` - Check health status
