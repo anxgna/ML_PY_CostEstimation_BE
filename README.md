@@ -2,7 +2,40 @@
 
 ## Overview
 
-This is the backend system for the House Price Estimation Platform. It is built using FastAPI and MySQL to predict house prices using a machine learning model, store historical predictions, and provide an interface for managing and retraining models.
+This is the backend system for the House Price Estimation Platform. It is built using FastAPI and PostgreSQL to predict house prices using a machine learning model, store historical predictions, and provide an interface for managing and retraining models.
+
+## Architecture
+
+```mermaid
+graph TD
+    %% Define Styles
+    classDef frontend fill:#ff9900,stroke:#333,stroke-width:2px,color:black,font-weight:bold;
+    classDef backend fill:#00d2ff,stroke:#333,stroke-width:2px,color:black,font-weight:bold;
+    classDef database fill:#33cc33,stroke:#333,stroke-width:2px,color:black,font-weight:bold;
+    classDef ml fill:#ff5bbc,stroke:#333,stroke-width:2px,color:black,font-weight:bold;
+    classDef user fill:#e6e6e6,stroke:#333,stroke-width:2px,color:black;
+
+    %% Nodes
+    User(fa:fa-user User):::user
+    
+    subgraph Render Platform
+        UI["Frontend<br/>(Gradio + FastAPI)"]:::frontend
+        API["Backend API<br/>(FastAPI)"]:::backend
+        DB[("PostgreSQL<br/>Database")]:::database
+        ML["ML Model<br/>(scikit-learn)"]:::ml
+    end
+
+    %% Connections
+    User -- "Accesses UI" --> UI
+    UI -- "POST /predict" --> API
+    UI -- "GET /predictions" --> API
+    
+    API -- "Loads Model" --> ML
+    API -- "Saves Prediction" --> DB
+    API -- "Reads History" --> DB
+    
+    ML -. "Trained Offline" .-> ML
+```
 
 ## Technology Stack
 
